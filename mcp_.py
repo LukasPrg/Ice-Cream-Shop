@@ -291,7 +291,7 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
         candidates = query("""
             SELECT f.*,
                    COALESCE(
-                       (SELECT EXTRACT(DAY FROM %s::DATE - MAX(df.date::DATE))
+                       (SELECT (%s::DATE - MAX(df.date::DATE))
                         FROM daily_features df WHERE df.flavor_id = f.id),
                        999
                    ) AS days_out
