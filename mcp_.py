@@ -332,7 +332,10 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
         reasons = []
 
         if require_seasonal:
-            seasonal = [c for c in eligible if c.get("season") not in (None, "all")]
+            from datetime import date
+            month = date.today().month
+            current_season = "summer" if 4 <= month <= 9 else "winter"
+            seasonal = [c for c in eligible if c.get("season") == current_season]
             if seasonal:
                 pick = seasonal[0]
                 selected.append(pick)
