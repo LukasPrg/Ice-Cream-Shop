@@ -332,8 +332,8 @@ async def call_tool(name: str, arguments: dict) -> list[TextContent]:
         reasons = []
 
         if require_seasonal:
-            from datetime import date
-            month = date.today().month
+            from datetime import date as dt
+            month = dt.today().month
             current_season = "summer" if 4 <= month <= 9 else "winter"
             seasonal = [c for c in eligible if c.get("season") == current_season]
             if seasonal:
